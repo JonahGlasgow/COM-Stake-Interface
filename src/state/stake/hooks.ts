@@ -40,7 +40,7 @@ export const STAKING_REWARDS_INFO: {
   [ChainId.MAINNET]: [
     {
       tokens: [Com[ChainId.MAINNET]],
-      stakingRewardAddress: '0x30dC4a59892b22eF32F78fBAF1c67576509cDC4C',
+      stakingRewardAddress: '0x30dC4a59892b22eF32F78fBAF1c67576509cDC4C'
     },
     {
       tokens: [Com[ChainId.MAINNET]],

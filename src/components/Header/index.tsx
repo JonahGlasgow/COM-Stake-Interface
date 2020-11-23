@@ -302,19 +302,9 @@ export default function Header() {
           <StyledExternalLink id={`home-nav-link`} href={'https://communitytoken.io/'}>
             {t('Home')}
           </StyledExternalLink>
-          <StyledNavLink
-            id={`pool-nav-link`}
-            to={'/pool'}
-            isActive={(match, { pathname }) =>
-              Boolean(match) ||
-              pathname.startsWith('/add') ||
-              pathname.startsWith('/remove') ||
-              pathname.startsWith('/create') ||
-              pathname.startsWith('/find')
-            }
-          >
-            {t('Add Liquidity')}
-          </StyledNavLink>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://app.uniswap.org/#/swap?inputCurrency=0x1b4052d98fb1888c2bf3b8d3b930e0aff8a910df&outputCurrency=ETH'}>
+            Buy $COM
+          </StyledExternalLink>
           <StyledNavLink id={`stake-nav-link`} to={'/COM'}>
             COM Staking
           </StyledNavLink>
