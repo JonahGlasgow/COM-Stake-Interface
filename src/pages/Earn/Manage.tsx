@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from 'react'
 import { AutoColumn } from '../../components/Column'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+
 
 import { JSBI, TokenAmount, ETHER } from '@uniswap/sdk'
 import { RouteComponentProps } from 'react-router-dom'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { useCurrency } from '../../hooks/Tokens'
 import { useWalletModalToggle } from '../../state/application/hooks'
-import { TYPE } from '../../theme'
+import { TYPE, ExternalLink } from '../../theme'
 
 import { RowBetween } from '../../components/Row'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
@@ -23,7 +23,6 @@ import { useColor } from '../../hooks/useColor'
 import { CountUp } from 'use-count-up'
 
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
-import { currencyId } from '../../utils/currencyId'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useSinglePair } from '../../data/Reserves'
 import usePrevious from '../../hooks/usePrevious'
@@ -99,12 +98,28 @@ export default function Manage({
  // const tokenB = wrappedCurrency(currencyB ?? undefined, chainId)
 
   const [, stakingTokenPair] = useSinglePair(tokenA)
-  const stakingInfo = useStakingInfo(stakingTokenPair)?.[0]
-  
+  const stakingInfoA =  useStakingInfo(stakingTokenPair)?.[0]
+
+ // const [, stakingTokenPairB] = useSinglePair(tokenA)
+  const stakingInfoB =  useStakingInfo(stakingTokenPair)?.[1]
+
+ // const [, stakingTokenPairC] = useSinglePair(tokenA)
+  const stakingInfoC =  useStakingInfo(stakingTokenPair)?.[2]
+
+ // const stakingInfoA =  useStakingInfo(stakingTokenPair)?.[0]
+ // const stakingInfoB =  useStakingInfo(stakingTokenPair)?.[1]
+ // const stakingInfoC =  useStakingInfo(stakingTokenPair)?.[2]
+
+  let stakingInfo = stakingInfoA || stakingInfoB || stakingInfoC
+  if (stakingInfo !== stakingInfoA ) {
+   stakingInfo = stakingInfoB 
+  } if (stakingInfo !== stakingInfoB) {
+   stakingInfo = stakingInfoC
+  }
 
   // detect existing unstaked LP position to show add button if none found
-  const userLiquidityUnstaked = useTokenBalance(stakingInfo?.stakingRewardAddress, stakingInfo?.stakedAmount?.token)
-  const showAddLiquidityButton = Boolean(stakingInfo?.stakedAmount?.equalTo('0') && userLiquidityUnstaked?.equalTo('0'))
+  let userLiquidityUnstaked = useTokenBalance(stakingInfo?.stakingRewardAddress, stakingInfo?.stakedAmount?.token)
+  let showAddLiquidityButton = Boolean(stakingInfo?.stakedAmount?.equalTo('0') && userLiquidityUnstaked?.equalTo('0'))
 
   // toggle for staking modal and unstaking modal
   const [showStakingModal, setShowStakingModal] = useState(false)
@@ -204,9 +219,11 @@ export default function Manage({
                 padding="8px"
                 borderRadius="8px"
                 width={'fit-content'}
-                as={Link}
-                to={`/add/${currencyA && currencyId(currencyA)}`}
               >
+                 <ExternalLink
+                style={{ width: '100%', textAlign: 'center' }}
+                href={`https://app.uniswap.org/#/swap?inputCurrency=0x1b4052d98fb1888c2bf3b8d3b930e0aff8a910df&outputCurrency=ETH`}
+              ></ExternalLink>
                 {`Get Community Tokens $COM`}
               </ButtonPrimary>
             </AutoColumn>
