@@ -38,14 +38,14 @@ export const STAKING_REWARDS_INFO: {
   }[]
 } = {
   [ChainId.MAINNET]: [
-    {
-      tokens: [Com[ChainId.MAINNET]],
-      stakingRewardAddress: '0x30dC4a59892b22eF32F78fBAF1c67576509cDC4C'
-    },
-    {
-      tokens: [Com[ChainId.MAINNET]],
-      stakingRewardAddress: '0x04D4976ebf104dCB541544bF9F1108BCD67D87fd'
-    },
+  //  {
+  //    tokens: [Com[ChainId.MAINNET]],
+  //    stakingRewardAddress: '0x30dC4a59892b22eF32F78fBAF1c67576509cDC4C'
+  //  },
+  //  {
+  //    tokens: [Com[ChainId.MAINNET]],
+  //    stakingRewardAddress: '0x04D4976ebf104dCB541544bF9F1108BCD67D87fd'
+  //  },
     {
       tokens: [Com[ChainId.MAINNET]],
       stakingRewardAddress: '0xbB687EC3e1EfD71c58164147899DFEa54c9dAb6e'

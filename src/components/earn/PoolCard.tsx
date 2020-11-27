@@ -76,7 +76,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
  // const token1 = stakingInfo.tokens[1]
 
   const currency0 = unwrappedToken(token0)
- // const currency1 = unwrappedToken(token1)
+  //const currency1 = unwrappedToken(token0)
 
   const isStaking = Boolean(stakingInfo.stakedAmount.greaterThan('0'))
 
@@ -129,11 +129,11 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
 
       <StatContainer>
         <RowBetween>
-          <TYPE.white> Total deposited</TYPE.white>
+          <TYPE.white>Minimum Stake Time</TYPE.white>
           <TYPE.white>
             {valueOfTotalStakedAmountInUSDC
               ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
-              : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}
+              : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? ''} 30 Days`}
           </TYPE.white>
         </RowBetween>
         <RowBetween>

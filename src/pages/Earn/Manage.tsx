@@ -98,27 +98,29 @@ export default function Manage({
  // const tokenB = wrappedCurrency(currencyB ?? undefined, chainId)
 
   const [, stakingTokenPair] = useSinglePair(tokenA)
-  const stakingInfoA =  useStakingInfo(stakingTokenPair)?.[0]
+  const stakingInfo =  useStakingInfo(stakingTokenPair)?.[0]
+
+  //const stakingInfoA =  useStakingInfo(stakingTokenPair)?.[0]
 
  // const [, stakingTokenPairB] = useSinglePair(tokenA)
-  const stakingInfoB =  useStakingInfo(stakingTokenPair)?.[1]
+ // const stakingInfoB =  useStakingInfo(stakingTokenPair)?.[1]
 
  // const [, stakingTokenPairC] = useSinglePair(tokenA)
-  const stakingInfoC =  useStakingInfo(stakingTokenPair)?.[2]
+ // const stakingInfoC =  useStakingInfo(stakingTokenPair)?.[2]
 
  // const stakingInfoA =  useStakingInfo(stakingTokenPair)?.[0]
  // const stakingInfoB =  useStakingInfo(stakingTokenPair)?.[1]
  // const stakingInfoC =  useStakingInfo(stakingTokenPair)?.[2]
 
-  let stakingInfo = stakingInfoA || stakingInfoB || stakingInfoC
-  if (stakingInfo !== stakingInfoA ) {
-   stakingInfo = stakingInfoB 
-  } if (stakingInfo !== stakingInfoB) {
-   stakingInfo = stakingInfoC
-  }
+ // let stakingInfo = stakingInfoA || stakingInfoB || stakingInfoC
+ // if (stakingInfo !== stakingInfoA ) {
+ //  stakingInfo = stakingInfoB 
+ // } if (stakingInfo !== stakingInfoB) {
+ //  stakingInfo = stakingInfoC
+ // }
 
   // detect existing unstaked LP position to show add button if none found
-  let userLiquidityUnstaked = useTokenBalance(stakingInfo?.stakingRewardAddress, stakingInfo?.stakedAmount?.token)
+  let userLiquidityUnstaked = useTokenBalance(account ?? undefined, stakingInfo?.stakedAmount?.token)
   let showAddLiquidityButton = Boolean(stakingInfo?.stakedAmount?.equalTo('0') && userLiquidityUnstaked?.equalTo('0'))
 
   // toggle for staking modal and unstaking modal
@@ -180,11 +182,11 @@ export default function Manage({
       <DataRow style={{ gap: '24px' }}>
         <PoolData>
           <AutoColumn gap="sm">
-            <TYPE.body style={{ margin: 0 }}>Total deposits</TYPE.body>
+            <TYPE.body style={{ margin: 0 }}>Minimum Stake Time</TYPE.body>
             <TYPE.body fontSize={24} fontWeight={500}>
               {valueOfTotalStakedAmountInUSDC
                 ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
-                : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ETH`}
+                : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? ''} 30 Days`}
             </TYPE.body>
           </AutoColumn>
         </PoolData>
@@ -323,8 +325,9 @@ export default function Manage({
           <span role="img" aria-label="wizard-icon" style={{ marginRight: '8px' }}>
             ⭐️
           </span>
-          When you withdraw, the contract will automagically claim $COM on your behalf!
+          If you withdraw early your rewards will be surrendered, make sure to check your deposit time on etherscan! 
         </TYPE.main>
+       
 
         {!showAddLiquidityButton && (
           <DataRow style={{ marginBottom: '1rem' }}>

@@ -291,7 +291,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
       {attempting && !hash && (
         <LoadingView onDismiss={wrappedOnDismiss}>
           <AutoColumn gap="12px" justify={'center'}>
-            <TYPE.largeHeader style={{ color: '#565A69' }}>Depositing Liquidity</TYPE.largeHeader>
+            <TYPE.largeHeader style={{ color: '#565A69' }}>Depositing Tokens</TYPE.largeHeader>
             <TYPE.body fontSize={20} style={{ color: '#565A69' }}>{parsedAmount?.toSignificant(4)} $COM</TYPE.body>
           </AutoColumn>
         </LoadingView>
